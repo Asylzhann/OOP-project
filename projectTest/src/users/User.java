@@ -1,11 +1,9 @@
 package users;
 
-import java.io.Serializable;
+
 import java.util.Objects;
 
-public abstract class User implements Serializable, Cloneable {
-    private static final long serialVersionUID = 1L;
-
+public abstract class User {
     protected int id;          
     protected String email;    
     protected String password; 
@@ -66,10 +64,6 @@ public abstract class User implements Serializable, Cloneable {
         return Objects.hash(id, email); 
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone(); 
-    }
 
     @Override
     public String toString() {

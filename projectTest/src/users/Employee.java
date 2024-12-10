@@ -1,11 +1,11 @@
 package users;
 
+
 import java.util.Objects;
 
 public abstract class Employee extends User {
-    private static final long serialVersionUID = 1L;
-	protected int employeeId;     
-    protected String department;  
+    protected int employeeId;     
+    protected String department; 
 
     public Employee(int id, String email, String password, String fullName, int employeeId, String department) {
         super(id, email, password, fullName);
@@ -41,11 +41,11 @@ public abstract class Employee extends User {
                super.equals(obj); 
     }
 
-
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), employeeId, department);
+        return Objects.hash(super.hashCode(), employeeId, department); 
     }
+
 
     @Override
     public String toString() {

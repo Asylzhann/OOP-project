@@ -2,7 +2,7 @@ package users;
 
 import java.util.Objects;
 
-public class Messages implements Comparable<Messages> {
+public class Messages{
     private User sender;     
     private User receiver;   
     private String content;  
@@ -61,11 +61,6 @@ public class Messages implements Comparable<Messages> {
         return Objects.hash(sender, receiver, content); 
     }
 
-    @Override
-    public int compareTo(Messages other) {
-        return this.content.compareTo(other.content);
-    }
-    
     @Override
     public String toString() {
         return "Messages{" +

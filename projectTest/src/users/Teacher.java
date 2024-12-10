@@ -3,8 +3,9 @@ package users;
 import java.util.List;
 import java.util.Objects;
 
-public class Teacher extends Employee implements Cloneable, Comparable<Teacher> {
-    private static final long serialVersionUID = 1L;
+import enums.TeacherTitle;
+
+public class Teacher extends Employee {
 	private String teacherId;             
     private TeacherTitle title;           
     private String department;           
@@ -115,11 +116,6 @@ public class Teacher extends Employee implements Cloneable, Comparable<Teacher> 
                '}';
     }
 
-
-    @Override
-    public int compareTo(Teacher other) {
-        return Double.compare(this.rating, other.rating);
-    }
 
 	@Override
 	public void sendMessage(String message) {
