@@ -49,5 +49,4 @@ public class Teacher extends Employee {
         System.out.println("Teacher " + getFullName() + " has logged out.");
     }
 
-    // Getters, setters, equals, hashCode, and toString can be added here (same as previously provided)
 }
