@@ -8,7 +8,10 @@ public class Teacher extends Employee {
     private List<Course> coursesTaught;
     private double rating;
 
-    public Teacher(int id, String email, String password, String fullName, int employeeId, String department, String teacherId, TeacherTitle title, List<Course> coursesTaught, double rating) {
+    public Teacher(int id, String email, String password, String fullName, 
+                   int employeeId, String department, 
+                   String teacherId, TeacherTitle title, 
+                   List<Course> coursesTaught, double rating) {
         super(id, email, password, fullName, employeeId, department);
         this.teacherId = teacherId;
         this.title = title;
@@ -26,5 +29,21 @@ public class Teacher extends Employee {
     public void sendComplaint(User receiver, String content, UrgencyLevel urgency) {
         Complaint complaint = new Complaint(this, receiver, content, urgency);
         complaint.send();
+    }
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public TeacherTitle getTitle() {
+        return title;
+    }
+
+    public List<Course> getCoursesTaught() {
+        return coursesTaught;
+    }
+
+    public double getRating() {
+        return rating;
     }
 }

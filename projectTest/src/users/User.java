@@ -20,4 +20,12 @@ public abstract class User {
     public void logout() {
         System.out.println(fullName + " logged out.");
     }
+
+    public Researcher becomeResearcher() {
+        return new ResearcherDecorator(this);
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
 }
