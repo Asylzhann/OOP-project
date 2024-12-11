@@ -43,6 +43,7 @@ public class Student extends User {
     }
 
     public void rateTeacher(Teacher teacher, int rating) {
+        teacher.addRating(rating);
         System.out.println(fullName + " rated " + teacher.getFullName() + " with a rating of " + rating);
     }
 

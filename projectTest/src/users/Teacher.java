@@ -7,12 +7,14 @@ import services.Complaint;
 import enums.TeacherTitle;
 import enums.UrgencyLevel;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Teacher extends Employee {
     private String teacherId;
     private TeacherTitle title;
     private List<Course> coursesTaught;
     private double rating;
+    private List<Integer> studentRatings;
 
     public Teacher(int id, String email, String password, String fullName, int employeeId, String teacherId, 
                    TeacherTitle title, List<Course> coursesTaught, double rating) {
@@ -21,6 +23,7 @@ public class Teacher extends Employee {
         this.title = title;
         this.coursesTaught = coursesTaught;
         this.rating = rating;
+        this.studentRatings = new ArrayList<>();
     }
 
     public void viewCourses() {
@@ -48,6 +51,22 @@ public class Teacher extends Employee {
         for (Student student : course.getStudents()) {
             System.out.println("- " + student.getFullName());
         }
+    }
+    
+    public void addRating(int rating) {
+        studentRatings.add(rating);
+        this.rating = calculateAverageRating();
+    }
+    
+    public double calculateAverageRating() {
+        if (studentRatings.isEmpty()) {
+            return 0;
+        }
+        int totalRating = 0;
+        for (int rate : studentRatings) {
+            totalRating += rate;
+        }
+        return (double) totalRating / studentRatings.size();
     }
 
     @Override

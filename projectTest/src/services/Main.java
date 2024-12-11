@@ -63,6 +63,11 @@ public class Main {
         System.out.println("Transcript for " + student1.getFullName() + ":");
         System.out.println(student1.getTranscript());
 
+        // Students rate teachers
+        student1.rateTeacher(teacher1, 5);
+        student2.rateTeacher(teacher1, 4);
+        System.out.println("Prof. Smith's rating: "+teacher1.getRating());
+
         // Employees sending message
         teacher1.sendMessage(teacher2, "Good morning, sir!");
         teacher1.sendMessage(teacher2, "Good evening, sir!");
