@@ -7,14 +7,22 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Database {
+    private static Database instance;
     private List<Course> courses;
     private List<Student> students;
     private List<Teacher> teachers;
 
-    public Database() {
+    private Database() {
         this.courses = new ArrayList<>();
         this.students = new ArrayList<>();
         this.teachers = new ArrayList<>();
+    }
+
+    public static Database getInstance() {
+        if (instance == null) {
+            instance = new Database();
+        }
+        return instance;
     }
 
     public void addCourse(Course course) {

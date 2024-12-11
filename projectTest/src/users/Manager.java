@@ -2,6 +2,7 @@ package users;
 
 import academic.Course;
 import enums.ManagerType;
+import services.Database;
 import java.util.List;
 
 public class Manager extends Employee {
@@ -17,9 +18,9 @@ public class Manager extends Employee {
         System.out.println("Manager approved registration of " + student.getFullName() + " to " + course.getName());
     }
 
-    public void addCourse(Course course, List<Course> courseList) {
-        courseList.add(course);
-        System.out.println("Manager added course: " + course.getName());
+    public void addCourse(Course course, Database database) {
+        database.getCourses().add(course);
+        System.out.println("Manager added course: " + course.getName() + " to the database.");
     }
 
     public void assignTeacherToCourse(Teacher teacher, Course course) {
