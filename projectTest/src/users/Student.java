@@ -1,22 +1,24 @@
 package users;
 
+import academic.Course;
+import academic.Journal;
+import academic.Transcript;
+import enums.StudentDegree;
+import java.util.Vector;
+
 public class Student extends User {
     private String studentID;
-    private String degree;
+    private StudentDegree degree;
     private String faculty;
     private int year;
     private double gpa;
     private int credits;
     private Transcript transcript;
-    private String organization;
-    private String organizationRole;
-    private boolean granted;
+    private Journal journal;
+    private Vector<Course> courses;
 
-    public Student(int id, String email, String password, String fullName, 
-                   String studentID, String degree, String faculty, 
-                   int year, double gpa, int credits, 
-                   Transcript transcript, String organization, 
-                   String organizationRole, boolean granted) {
+    public Student(int id, String email, String password, String fullName, String studentID, StudentDegree degree, 
+                   String faculty, int year, double gpa, int credits, Transcript transcript) {
         super(id, email, password, fullName);
         this.studentID = studentID;
         this.degree = degree;
@@ -25,24 +27,38 @@ public class Student extends User {
         this.gpa = gpa;
         this.credits = credits;
         this.transcript = transcript;
-        this.organization = organization;
-        this.organizationRole = organizationRole;
-        this.granted = granted;
+        this.journal = new Journal();
+        this.courses = new Vector<>();
     }
 
     public void registerForCourse(Course course) {
-        System.out.println(fullName + " registered for course " + course.getName());
+        courses.add(course);
+        course.addStudent(this);
+        System.out.println(fullName + " registered for the course: " + course.getName());
     }
 
     public void viewTranscript() {
-        System.out.println(fullName + "'s transcript: " + transcript.getDetails());
+        System.out.println("Transcript for " + fullName + ":");
+        System.out.println(transcript);
+    }
+
+    public void rateTeacher(Teacher teacher, int rating) {
+        System.out.println(fullName + " rated " + teacher.getFullName() + " with a rating of " + rating);
+    }
+
+    public Journal getJournal() {
+        return journal;
+    }
+
+    public Transcript getTranscript() {
+        return transcript;
     }
 
     public String getStudentID() {
         return studentID;
     }
 
-    public String getDegree() {
+    public StudentDegree getDegree() {
         return degree;
     }
 
@@ -54,27 +70,13 @@ public class Student extends User {
         return year;
     }
 
-    public double getGpa() {
-        return gpa;
+    @Override
+    public void login() {
+        System.out.println("Student " + fullName + " has logged in.");
     }
 
-    public int getCredits() {
-        return credits;
-    }
-
-    public boolean isGranted() {
-        return granted;
-    }
-
-    public String getOrganization() {
-        return organization;
-    }
-
-    public String getOrganizationRole() {
-        return organizationRole;
-    }
-
-    public Transcript getTranscript() {
-        return transcript;
+    @Override
+    public void logout() {
+        System.out.println("Student " + fullName + " has logged out.");
     }
 }

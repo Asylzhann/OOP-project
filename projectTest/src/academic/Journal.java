@@ -1,17 +1,14 @@
 package academic;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Vector;
-import users.Course;
 
+public class Journal {
+    private HashMap<Course, Vector<Mark>> marks;
 
-public class Journal implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    private HashMap<Course, Vector<Mark>> marks = new HashMap<>();
-
-    public Journal() {}
+    public Journal() {
+        marks = new HashMap<>();
+    }
 
     public HashMap<Course, Vector<Mark>> getMarks() {
         return marks;
@@ -23,37 +20,28 @@ public class Journal implements Serializable {
 
     public double getTotal(Course course) {
         double total = 0;
-        for (Course c : marks.keySet()) {
-            if (!c.getName().equals(course.getName())) continue;
-            for (Mark m : marks.get(c)) {
-                total += m.getMark();
+        if (marks.containsKey(course)) {
+            for (Mark mark : marks.get(course)) {
+                total += mark.getMark();
             }
         }
-        System.out.println(total);
         return total;
     }
 
-    public double getGPA(Course course) {
-        double totalMarks = getTotal(course);
-        return convertToGPA(totalMarks);
-    }
-
-    private double convertToGPA(double mark) {
-        if (mark > 95) return 4.00;
-        if (mark > 90) return 3.67;
-        if (mark > 85) return 3.33;
-        if (mark > 80) return 3.0;
-        if (mark > 75) return 2.67;
-        if (mark > 70) return 2.33;
-        if (mark > 65) return 2.0;
-        if (mark > 60) return 1.67;
-        if (mark > 55) return 1.33;
-        if (mark > 50) return 1.00;
-        return 0;
+    public void addMark(Course course, Mark mark) {
+        marks.computeIfAbsent(course, k -> new Vector<>()).add(mark);
     }
 
     public void clear() {
-        marks = new HashMap<>();
+        marks.clear();
+    }
+
+    public void viewMarks() {
+        for (Course course : marks.keySet()) {
+            System.out.println("Course: " + course.getName());
+            for (Mark mark : marks.get(course)) {
+                System.out.println(mark);
+            }
+        }
     }
 }
-
