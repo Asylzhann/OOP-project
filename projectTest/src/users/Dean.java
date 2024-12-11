@@ -1,26 +1,26 @@
 package users;
 
-import services.Message;
+import services.Complaint;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Dean extends Employee {
-    private List<Message> requests;
+    private List<Complaint> complaints;
 
     public Dean(int id, String email, String password, String fullName, int employeeId) {
         super(id, email, password, fullName, employeeId);
-        this.requests = new ArrayList<>();
+        this.complaints = new ArrayList<>();
     }
 
-    public void receiveComplaint(Message complaint) {
-        requests.add(complaint);
+    public void receiveComplaint(Complaint complaint) {
+        complaints.add(complaint);
         System.out.println("Dean received a complaint from " + complaint.getSender().getFullName());
     }
 
-    public void viewRequests() {
-        System.out.println("Dean is reviewing the following requests:");
-        for (Message request : requests) {
-            System.out.println("- From: " + request.getSender().getFullName() + ", Content: " + request.getContent());
+    public void viewComplaints() {
+        System.out.println("Dean is reviewing the following complaints:");
+        for (Complaint complaint : complaints) {
+            System.out.println("- From: " + complaint.getSender().getFullName() + ", Content: " + complaint.getContent());
         }
     }
 

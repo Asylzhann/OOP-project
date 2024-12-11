@@ -50,8 +50,11 @@ public class Main {
         manager.approveRegistration(student2, course1);
 
         // Create and send complaints
+        Dean dean = new Dean(6, "dean@example.com", "password", "Dean Wilson", 1004);
         Complaint complaint = new Complaint(student1, teacher1, "Student's behavior", UrgencyLevel.HIGH);
         complaint.send();
+        dean.receiveComplaint(complaint);
+        System.out.println(complaint.view());
 
         // Manager generates statistics
         manager.generateStatistics(List.of(student1, student2));
@@ -61,6 +64,7 @@ public class Main {
         System.out.println(student1.getTranscript());
 
         // Employees sending message
+        teacher1.sendMessage(teacher2, "Good morning, sir!");
         teacher1.sendMessage(teacher2, "Good evening, sir!");
         teacher2.viewReceivedMessages();
     }

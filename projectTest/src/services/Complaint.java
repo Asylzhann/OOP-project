@@ -2,7 +2,6 @@ package services;
 
 import enums.UrgencyLevel;
 import users.User;
-
 import java.util.Objects;
 
 public class Complaint {
@@ -27,6 +26,14 @@ public class Complaint {
                "\nTo: " + receiver.getFullName() +
                "\nContent: " + content +
                "\nUrgency: " + urgency;
+    }
+
+    public User getSender() {
+        return sender;
+    }
+
+    public String getContent() {
+        return content;
     }
 
     @Override
