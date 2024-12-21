@@ -1,6 +1,8 @@
 package users;
 
 import java.util.Objects;
+import users.User;
+
 
 public abstract class User {
     protected int id;          
@@ -36,6 +38,17 @@ public abstract class User {
     public String getFullName() {
         return fullName;
     }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -54,4 +67,6 @@ public abstract class User {
     public String toString() {
         return "User{id=" + id + ", email='" + email + "', fullName='" + fullName + "'}";
     }
+
+
 }
