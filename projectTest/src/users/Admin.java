@@ -3,59 +3,76 @@ package users;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Admin extends Employee {
-    private List<User> users;
-    public Admin(int id, String email, String password, String fullName, int employeeId) {
-        super(id, email, password, fullName, employeeId);
-        this.users = new ArrayList<>();
+public class Admin extends User {
+    private List<User> managedUsers; 
+    private List<String> logs;     
+
+    public Admin(int id, String email, String password, String fullName) {
+        super(id, email, password, fullName);
+        this.managedUsers = new ArrayList<>();
+        this.logs = new ArrayList<>();
+    }
+
+    public void addUser(User user) {
+        if (user != null && !managedUsers.contains(user)) {
+            managedUsers.add(user);
+            logs.add("Added user: " + user.getFullName());
+            System.out.println("User added successfully: " + user.getFullName());
+        } else {
+            System.out.println("User already exists or is invalid.");
+        }
+    }
+
+    public void removeUser(User user) {
+        if (user != null && managedUsers.remove(user)) {
+            logs.add("Removed user: " + user.getFullName());
+            System.out.println("User removed successfully: " + user.getFullName());
+        } else {
+            System.out.println("User not found.");
+        }
+    }
+
+    public void updateUser(int userId, String newEmail, String newFullName) {
+        for (User user : managedUsers) {
+            if (user.getId() == userId) {
+                user.setEmail(newEmail);
+                user.setFullName(newFullName);
+                logs.add("Updated user: " + user.getFullName());
+                System.out.println("User updated successfully: " + user.getFullName());
+                return;
+            }
+        }
+        System.out.println("User with ID " + userId + " not found.");
+    }
+
+    public void seeLogs() {
+        System.out.println("Admin Logs:");
+        for (String log : logs) {
+            System.out.println(log);
+        }
     }
 
     @Override
     public void login() {
-        System.out.println("Admin " + fullName + " has logged in.");
+        isLoggedIn = true;
+        System.out.println(fullName + " (Admin) logged in.");
     }
+
     @Override
     public void logout() {
-        System.out.println("Admin " + fullName + " has logged out.");
-    }
-    public void addUser(User user) {
-        users.add(user);
-        System.out.println("Admin " + fullName + " added a new user: " + user.getFullName());
-    }
-
-    public void removeUser(User user) {
-        if (users.remove(user)) {
-            System.out.println("Admin " + fullName + " removed user: " + user.getFullName());
-        } else {
-            System.out.println("User not found: " + user.getFullName());
-        }
-    }
-
- 
-    public void updateUser(User user, String newEmail, String newPassword, String newFullName) {
-        user.setEmail(newEmail);
-        user.setPassword(newPassword);
-        user.setFullName(newFullName);
-        System.out.println("Admin " + fullName + " updated user information: " + user.getFullName());
-    }
-
-    public void viewUsers() {
-        System.out.println("Admin " + fullName + " is viewing all users:");
-        for (User user : users) {
-            System.out.println("- " + user);
-        }
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
+        isLoggedIn = false;
+        System.out.println(fullName + " (Admin) logged out.");
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", Admin{usersCount=" + users.size() + "}";
+        return "Admin{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", isLoggedIn=" + isLoggedIn +
+                ", managedUsers=" + managedUsers.size() +
+                ", logs=" + logs.size() +
+                '}';
     }
 }
